@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Câu 1</title>
+</head>
+<body>
+<h1>Cho một mảng số nguyên có số phần tử không vượt quá 50 phần tử, viết chương trình
+    hiển thị trung bình cộng các số có trong mảng chia hết cho 3</h1>
+<label for="so">Nhập số (tối đa 50 phần tử):</label>
+<input type="number" id="so" name="so" min="1" max="50"/>
+<button onclick="themPhanTu()">Thêm vào mảng</button>
+<button onclick="tinhTrungBinh()">Tính trung bình</button>
+
+<div class="result">
+    <p><strong>Mảng hiện tại:</strong> <span id="hienThiMang">[ ]</span></p>
+    <p><strong>Kết quả:</strong> <span id="hienThiKetQua"></span></p>
+</div>
+
+<script>
+    let numbers = [];
+
+    function themPhanTu() {
+        let input = document.getElementById('so');
+        let number = parseInt(input.value);
+
+        if (numbers.length >= 50) {
+            alert("Mảng đã đạt giới hạn 50 phần tử!");
+            return;
+        }
+
+        if (!isNaN(number)) {
+            numbers.push(number);
+            document.getElementById('hienThiMang').innerText = `Mảng hiện tại: ${numbers.join(', ')}`;
+            input.value = '';
+        } else {
+            alert("Vui lòng nhập một số hợp lệ");
+        }
+    }
+
+    function tinhTrungBinh() {
+        let soChiHetChoBa = numbers.filter(number => number % 3 === 0);
+        if (soChiHetChoBa.length > 0) {
+            let tong = soChiHetChoBa.reduce((a, b) => a + b, 0);
+            let trungBinh = tong / soChiHetChoBa.length;
+            document.getElementById('hienThiKetQua').innerText = `Trung bình cộng: ${trungBinh}`;
+        } else {
+            document.getElementById('hienThiKetQua').innerText = "Không có số nào chia hết cho 3 trong mảng";
+        }
+    }
+
+</script>
+</body>
+</html>

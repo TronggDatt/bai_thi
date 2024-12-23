@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Câu 2</title>
+</head>
+<body>
+<h1>iết hàm cho phép nhập vào một số nguyên dương, kiểm tra xem số vừa nhập đó có
+    phải là số hoàn hảo hay không. Chương trình sẽ trả về true nếu số đó là số hoàn hảo và false
+    nếu không phải là số hoàn hảo.</h1>
+<h1>Kiểm Tra Số Hoàn Hảo</h1>
+<label for="soNguyenDuong">Nhập một số nguyên dương:</label>
+<input type="number" id="soNguyenDuong" min="1"/>
+<button onclick="kiemTraSoHoanHao()">Kiểm tra</button>
+
+<div class="result">
+    <p><strong>Kết quả:</strong> <span id="hienThiKetQua"></span></p>
+</div>
+<script>
+    function soHoanHao(soNguyenDuong) {
+        if (soNguyenDuong <= 0) return false;
+
+        let tong = 0;
+        for (let i = 1; i <= soNguyenDuong / 2; i++) {
+            if (soNguyenDuong % i === 0) {
+                tong += i;
+            }
+        }
+
+        return tong === soNguyenDuong;
+    }
+
+    function kiemTraSoHoanHao() {
+        let so = parseInt(document.getElementById('soNguyenDuong').value);
+
+        if (isNaN(so) || so <= 0) {
+            alert("Vui lòng nhập một số nguyên dương hợp lệ!");
+            return;
+        }
+
+        let ketQua = soHoanHao(so);
+        let hienThiKetQua = document.getElementById('hienThiKetQua');
+
+        if (ketQua) {
+            hienThiKetQua.innerText = `True`;
+        } else {
+            hienThiKetQua.innerText = `False`;
+        }
+    }
+</script>
+</body>
+</html>

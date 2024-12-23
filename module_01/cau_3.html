@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Câu 3</title>
+</head>
+<body>
+<h1>Viết chương trình nhập ngày tháng. Tính xem tháng/ năm đó có bao nhiêu ngày.</h1>
+<label for="ngayThang">Nhập tháng/năm (MM/yyyy):</label>
+<input type="text" id="ngayThang" placeholder="MM/yyyy">
+<button onclick="kiemTraNgay()">Kiểm tra</button>
+<p id="result"></p>
+<script>
+    function kiemTraNgay() {
+        let input = document.getElementById("ngayThang").value;
+        let ketQua = document.getElementById("result");
+
+        let dinhDang = /^(0[1-9]|1[0-2])\/\d{4}$/;
+        if (!dinhDang.test(input)) {
+            ketQua.innerText = "Vui lòng nhập đúng định dạng MM/yyyy (ví dụ: 01/2020)";
+            return;
+        }
+
+        let [thang, nam] = input.split("/").map(Number);
+
+        function laNamNhuan(year) {
+            return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+        }
+
+        let soNgay;
+        switch (thang) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                soNgay = 31;
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                soNgay = 30;
+                break;
+            case 2:
+                soNgay = laNamNhuan(nam) ? 29 : 28;
+                break;
+            default:
+                soNgay = "Không xác định";
+        }
+
+        ketQua.innerText = `Tháng ${thang}/${nam} có ${soNgay} ngày.`;
+    }
+</script>
+</body>
+</html>
